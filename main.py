@@ -59,7 +59,9 @@ def updateHost():
         if len(trueIp) > 0:
             addr2ip[site] = trueIp
             print(site + "\t" + ','.join(trueIp))
-        # if (platform.system() == 'Windows'):
+        if platform.system() == 'Windows':
+            systemHostLocation = 'C:\\Windows\\System32\\drivers\\etc\\hosts'
+            shutil.copyfile(systemHostLocation, hostLocation)
         with open(hostLocation, "r", encoding='utf8') as f1:
             f1_lines = f1.readlines()
             with open("tempHost", "w", encoding='utf8') as f2:
