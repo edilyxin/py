@@ -24,28 +24,6 @@
 # localhost name resolution is handled within DNS itself.
 #	127.0.0.1       localhost
 #	::1             localhost
-# Added by Docker Desktop
-#192.168.1.219 host.docker.internal
-#192.168.1.219 gateway.docker.internal
-# To allow the same kube context to work on the host and the container:
-#127.0.0.1 kubernetes.docker.internal
-# End of section
-
-# GitHub Start
-# GitHub End
-
-
-# TailscaleHostsSectionStart
-# This section contains MagicDNS entries for Tailscale.
-# Do not edit this section manually.
-
-100.90.22.45 ds920plus.tailb05b0.ts.net. ds920plus
-100.112.255.127 flow13.tailb05b0.ts.net. flow13
-100.65.6.37 macbook-pro-of-sheen.tailb05b0.ts.net. macbook-pro-of-sheen
-100.109.33.61 xin-song-pc.tailb05b0.ts.net. xin-song-pc
-
-# TailscaleHostsSectionEnd
-
 
 #**********github 2023-03-21T13:03:31+08:00 update **********
 199.16.158.182	github.global.ssl.fastly.net
