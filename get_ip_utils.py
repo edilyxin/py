@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import re
 import json
 
-# import DNS
+# import DNS  https://www.cnblogs.com/willison/p/13830967.html
 
 
 def getIpFromIpaddress(site):
