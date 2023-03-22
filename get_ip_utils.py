@@ -3,12 +3,19 @@ import time
 from bs4 import BeautifulSoup
 import re
 import json
+
 # import DNS
 
 
 def getIpFromIpaddress(site):
-    headers = {'user-agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebkit/737.36(KHTML, like Gecke) Chrome/52.0.2743.82 Safari/537.36',
-               'Host': 'ipaddress.com'}
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.41',
+        'Accept': '*/*',
+        'Cache-Control': 'no-cache',
+        'Host': 'site.ip138.com',
+        'Connection': 'keep-alive',
+        'Referer': 'https://site.ip138.com/%s/' % (site),
+    }
     url = "https://ipaddress.com/website/" + site
     trueip = None
     try:
@@ -33,13 +40,18 @@ def getIpFromIp138(site):
         'Cache-Control': 'no-cache',
         'Host': 'site.ip138.com',
         'Connection': 'keep-alive',
-        'Referer': 'https://site.ip138.com/%s/' % (site)
+        'Referer': 'https://site.ip138.com/%s/' % (site),
     }
-    url = "https://site.ip138.com/domain/read.do?domain=" + site.lower() + "&time=" + str(time.time())
+    url = (
+        "https://site.ip138.com/domain/read.do?domain="
+        + site.lower()
+        + "&time="
+        + str(time.time())
+    )
     trueip = []
     try:
         res = requests.get(url, headers=headers, timeout=5, data={})
-        if (res.status_code == 200):
+        if res.status_code == 200:
             soup = json.loads(res.text)
             ips = soup['data']  # type: ignore
             for ip in ips:
@@ -52,8 +64,10 @@ def getIpFromIp138(site):
 
 
 def getIpFromChinaz(site):
-    headers = {'user-agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebkit/737.36(KHTML, like Gecke) Chrome/52.0.2743.82 Safari/537.36',
-               'Host': 'ip.tool.chinaz.com'}
+    headers = {
+        'user-agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebkit/737.36(KHTML, like Gecke) Chrome/52.0.2743.82 Safari/537.36',
+        'Host': 'ip.tool.chinaz.com',
+    }
     url = "http://ip.tool.chinaz.com/" + site
     trueip = None
     try:
@@ -70,13 +84,12 @@ def getIpFromChinaz(site):
 
 
 def getIpFromWhatismyipaddress(site):
-    headers = {'user-agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebkit/737.36(KHTML, like Gecke) Chrome/52.0.2743.82 Safari/537.36',
-               'Host': 'ip.tool.chinaz.com'}
-    url = "https://whatismyipaddress.com//hostname-ip"
-    data = {
-        "DOMAINNAME": site,
-        "Lookup IP Address": "Lookup IP Address"
+    headers = {
+        'user-agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebkit/737.36(KHTML, like Gecke) Chrome/52.0.2743.82 Safari/537.36',
+        'Host': 'ip.tool.chinaz.com',
     }
+    url = "https://whatismyipaddress.com//hostname-ip"
+    data = {"DOMAINNAME": site, "Lookup IP Address": "Lookup IP Address"}
     trueip = None
     try:
         res = requests.post(url, headers=headers, data=data, timeout=30)
@@ -95,14 +108,16 @@ def getIpFromipapi(site):
     '''
     return trueip: None or ip
     '''
-    headers = {'user-agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebkit/737.36(KHTML, like Gecke) Chrome/52.0.2743.82 Safari/537.36',
-               'Host': 'ip-api.com'}
+    headers = {
+        'user-agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebkit/737.36(KHTML, like Gecke) Chrome/52.0.2743.82 Safari/537.36',
+        'Host': 'ip-api.com',
+    }
     url = "http://ip-api.com/json/%s?lang=zh-CN" % (site)
     trueip = None
     try:
         res = requests.get(url, headers=headers, timeout=5)
         res = json.loads(res.text)
-        if (res["status"] == "success"):
+        if res["status"] == "success":
             trueip = res["query"]
     except Exception as e:
         print("查询" + site + " 时出现错误: " + str(e))
@@ -121,4 +136,4 @@ def getIpFromipapi(site):
 #     return trueip
 
 
-print(getIpFromIp138('github.global.ssl.fastly.net'))
+print(getIpFromIpaddress('github.global.ssl.fastly.net'))
