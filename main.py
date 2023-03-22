@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
-import os, platform
+import os
+import platform
 import shutil
 from datetime import datetime, timezone, timedelta
 import get_ip_utils
