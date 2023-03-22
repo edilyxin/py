@@ -3,7 +3,7 @@ import time
 from bs4 import BeautifulSoup
 import re
 import json
-import DNS
+# import DNS
 
 
 def getIpFromIpaddress(site):
@@ -47,6 +47,7 @@ def getIpFromIp138(site):
             return trueip
     except Exception as e:
         print("查询" + site + " 时出现错误: " + str(e))
+        raise e
     return trueip
 
 
@@ -108,16 +109,16 @@ def getIpFromipapi(site):
     return trueip
 
 
-def getTrueIp(site):
-    url = site
-    trueip = None
-    try:
-        res = DNS.dnslookup(url, qtype='A')  # convenience routine to return just answer data for any query type
-        if len(res) != 0:
-            trueip = res
-    except Exception as e:
-        print("query ip error is " + str(e))
-    return trueip
+# def getTrueIp(site):
+#     url = site
+#     trueip = None
+#     try:
+#         res = DNS.dnslookup(url, qtype='A')  # convenience routine to return just answer data for any query type
+#         if len(res) != 0:
+#             trueip = res
+#     except Exception as e:
+#         print("query ip error is " + str(e))
+#     return trueip
 
 
 print(getIpFromIp138('github.global.ssl.fastly.net'))
