@@ -9,14 +9,15 @@ import json
 
 def getIpFromIpaddress(site):
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.41',
-        'Accept': '*/*',
-        'Cache-Control': 'no-cache',
-        'Host': 'site.ip138.com',
-        'Connection': 'keep-alive',
-        'Referer': 'https://site.ip138.com/%s/' % (site),
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Host': 'www.ipaddress.com',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15',
+        'Accept-Language': 'zh-CN,zh-Hans;q=0.9',
+        'Referer': 'https://www.ipaddress.com/',
+        'Connection': 'keep-alive'
     }
-    url = "https://ipaddress.com/website/" + site
+    url = "https://ipaddress.com/site/" + site
     trueip = None
     try:
         res = requests.get(url, headers=headers, timeout=30)
