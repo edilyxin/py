@@ -10,7 +10,7 @@ import json
 def getIpFromIpaddress(site):
     headers = {
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-        'Accept-Encoding': 'gzip, deflate, br',
+        'Accept-Encoding': 'gzip, deflate',
         'Host': 'www.ipaddress.com',
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15',
         'Accept-Language': 'zh-CN,zh-Hans;q=0.9',
@@ -21,12 +21,14 @@ def getIpFromIpaddress(site):
     trueip = None
     try:
         res = requests.get(url, headers=headers, timeout=30)
-        soup = BeautifulSoup(res.text, 'html.parser')
+        soup = BeautifulSoup(res.text, 'lxml')
+        result = soup.find_all('ui', 'comma-separated')
         ip = re.findall(r"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b", res.text)
-        result = soup.find_all('div', class_="comma-separated")
-        for c in result:
-            if len(ip) != 0:
-                trueip = ip[0]
+        trueip = list(set(ip))
+        result = soup.find_all('ui', class_="comma-separated")
+        # for c in result:
+        #     if len(ip) != 0:
+        #         trueip = ip[0]
     except Exception as e:
         print("查询" + site + " 时出现错误: " + str(e))
     return trueip
@@ -125,7 +127,7 @@ def getIpFromipapi(site):
     return trueip
 
 
-# def getTrueIp(site):
+# def getTrueIp(site): assets-cdn.github.com   github.global.ssl.fastly.net
 #     url = site
 #     trueip = None
 #     try:
@@ -137,4 +139,4 @@ def getIpFromipapi(site):
 #     return trueip
 
 
-print(getIpFromIpaddress('github.global.ssl.fastly.net'))
+print(getIpFromIpaddress('github.com'))
