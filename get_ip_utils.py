@@ -1,4 +1,3 @@
-from ast import List
 import requests
 import time
 from bs4 import BeautifulSoup
@@ -20,6 +19,7 @@ def getIpFromIpaddress(site):
     }
     url = "https://ipaddress.com/site/" + site
     ips = []
+    ipList = []
     try:
         res = requests.get(url, headers=headers, timeout=30)
         soup = BeautifulSoup(res.text, 'lxml')
@@ -28,12 +28,12 @@ def getIpFromIpaddress(site):
             source = rs.contents
             if len(source) > 0:
                 for s in source:
-                    list = re.findall(r"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b", s.text)
-                    if len(list) > 0:
-                        ips.extend(list)
+                    myList = re.findall(r"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b", s.text)
+                    if len(myList) > 0:
+                        ips.extend(myList)
     except Exception as e:
         print("查询" + site + " 时出现错误: " + str(e))
-    ipList = List(set(ips)) if len(ips) > 0 else []
+    ipList = list(set(ips)) if len(ips) > 0 else [] # type: ignore
     return ipList
 
 

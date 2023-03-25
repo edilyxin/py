@@ -77,9 +77,11 @@ def updateHost():
         .isoformat()
     )
     try:
+        initParams()
         for site in sites:
             # trueIp is list
-            trueIp = get_ip_utils.getIpFromIp138(site)
+            # trueIp = get_ip_utils.getIpFromIp138(site)  # The ip address resolved is incorrect
+            trueIp = get_ip_utils.getIpFromIpaddress(site)
             if len(trueIp) > 0:
                 addr2ip[site] = trueIp
                 print(site + "\t" + ','.join(trueIp))
@@ -108,7 +110,7 @@ def updateHost():
 
 
 if __name__ == "__main__":
-    initParams()
+    
     updateHost()
     print('update success')
 
