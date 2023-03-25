@@ -1,3 +1,4 @@
+from ast import List
 import requests
 import time
 from bs4 import BeautifulSoup
@@ -15,23 +16,25 @@ def getIpFromIpaddress(site):
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15',
         'Accept-Language': 'zh-CN,zh-Hans;q=0.9',
         'Referer': 'https://www.ipaddress.com/',
-        'Connection': 'keep-alive'
+        'Connection': 'keep-alive',
     }
     url = "https://ipaddress.com/site/" + site
-    trueip = None
+    ips = []
     try:
         res = requests.get(url, headers=headers, timeout=30)
         soup = BeautifulSoup(res.text, 'lxml')
-        result = soup.find_all('ui', 'comma-separated')
-        ip = re.findall(r"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b", res.text)
-        trueip = list(set(ip))
-        result = soup.find_all('ui', class_="comma-separated")
-        # for c in result:
-        #     if len(ip) != 0:
-        #         trueip = ip[0]
+        result = soup.find_all('ul', 'comma-separated')
+        for rs in result:
+            source = rs.contents
+            if len(source) > 0:
+                for s in source:
+                    list = re.findall(r"\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b", s.text)
+                    if len(list) > 0:
+                        ips.extend(list)
     except Exception as e:
         print("查询" + site + " 时出现错误: " + str(e))
-    return trueip
+    ipList = List(set(ips)) if len(ips) > 0 else []
+    return ipList
 
 
 def getIpFromIp138(site):
@@ -127,7 +130,7 @@ def getIpFromipapi(site):
     return trueip
 
 
-# def getTrueIp(site): assets-cdn.github.com   github.global.ssl.fastly.net
+# def getTrueIp(site): assets-cdn.github.com   github.global.ssl.fastly.net github.com
 #     url = site
 #     trueip = None
 #     try:
@@ -139,4 +142,4 @@ def getIpFromipapi(site):
 #     return trueip
 
 
-print(getIpFromIpaddress('github.com'))
+print(getIpFromIpaddress('github.global.ssl.fastly.net'))
