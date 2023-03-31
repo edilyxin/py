@@ -1,0 +1,60 @@
+#-------- 公共配置 --------
+
+#For NC, no new entry above, between this and next comments
+#113.106.54.222      VPN-sz.tendcloud.com
+#end of NC entry
+#﻿# Copyright (c) 1993-2009 Microsoft Corp.
+#
+# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.
+#
+# This file contains the mappings of IP addresses to host names. Each
+# entry should be kept on an individual line. The IP address should
+# be placed in the first column followed by the corresponding host name.
+# The IP address and the host name should be separated by at least one
+# space.
+#
+# Additionally, comments (such as these) may be inserted on individual
+# lines or following the machine name denoted by a '#' symbol.
+#
+# For example:
+#
+#      102.54.94.97     rhino.acme.com          # source server
+#       38.25.63.10     x.acme.com              # x client host
+
+# localhost name resolution is handled within DNS itself.
+#	127.0.0.1       localhost
+#	::1             localhost
+# Added by Docker Desktop
+#192.168.1.219 host.docker.internal
+#192.168.1.219 gateway.docker.internal
+# To allow the same kube context to work on the host and the container:
+#127.0.0.1 kubernetes.docker.internal
+# End of section
+
+# GitHub Start
+# GitHub End
+
+
+
+
+# TailscaleHostsSectionStart
+# This section contains MagicDNS entries for Tailscale.
+# Do not edit this section manually.
+
+100.90.22.45 ds920plus.tailb05b0.ts.net. ds920plus
+100.112.255.127 flow13.tailb05b0.ts.net. flow13
+100.65.6.37 macbook-pro-of-sheen.tailb05b0.ts.net. macbook-pro-of-sheen
+100.109.33.61 xin-song-pc.tailb05b0.ts.net. xin-song-pc
+
+# TailscaleHostsSectionEnd
+#**********github 2023-03-27T14:50:43+08:00 update **********
+151.101.193.194	github.global.ssl.fastly.net
+151.101.65.194	github.global.ssl.fastly.net
+151.101.129.194	github.global.ssl.fastly.net
+151.101.1.194	github.global.ssl.fastly.net
+185.199.108.153	assets-cdn.github.com
+185.199.110.153	assets-cdn.github.com
+185.199.109.153	assets-cdn.github.com
+185.199.111.153	assets-cdn.github.com
+140.82.112.4	github.com
+#******* github hosts update end **********

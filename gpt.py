@@ -1,4 +1,10 @@
 import requests
+# import openai
+import win32com.client as wincl  # pip install pywin32
+import json
+
+speak = wincl.Dispatch("SAPI.SpVoice")
+
 
 # url = "https://api.openai.com/v1/chat/completions"
 url = "https://api.openai.com/v1/images/generations"
@@ -16,12 +22,18 @@ headers = {
     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.3 Safari/605.1.15',
     'Content-Type': 'application/json',
     'Accept-Language': 'zh-CN,zh-Hans;q=0.9',
-    'Authorization': 'Bearer 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',
+    'Authorization': 'Bearer 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',
 }
 
 response = requests.request("POST", url, headers=headers, data=payload)
 
 print(response.text)
+
+gpt_response = json.loads(response.text)
+try:
+    speak.Speak(gpt_response['choices'][0]['message']['content'].strip())
+except Exception as e:
+    print(str(e))
+# speak.Speak(gpt_response['choices'][0]['message']['content'].replace('\n\n', ''))
 # openai.organization = "org-9FucxtwNZHeS2hHTwnkj5brx"
-# openai.api_key = "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"
 # print(openai.Chat.)
